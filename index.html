@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>Sanvi — My Universe ❤️</title>
 
     <link
@@ -17,30 +20,32 @@
         box-sizing: border-box;
       }
 
+      /* iOS SAFE BODY */
       body {
-        min-height: 100vh;
+        min-height: 100svh;
+        background: #090a0f;
+        font-family: "Poppins", sans-serif;
+        overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
-        background: radial-gradient(circle at top, #1b2735, #090a0f);
-        font-family: "Poppins", sans-serif;
-        overflow: hidden;
         position: relative;
       }
 
-      body::before {
-        content: "";
-        position: absolute;
+      /* iOS SAFE BACKGROUND LAYER */
+      .bg-layer {
+        position: fixed;
         inset: 0;
-        background:
-          radial-gradient(circle at 20% 30%, rgba(255,182,193,0.15), transparent 50%),
-          radial-gradient(circle at 80% 70%, rgba(255,105,180,0.12), transparent 60%);
-        animation: glow 20s infinite alternate;
         z-index: -1;
+        background:
+          radial-gradient(circle at 20% 30%, rgba(255,182,193,0.18), transparent 55%),
+          radial-gradient(circle at 80% 70%, rgba(255,105,180,0.15), transparent 60%),
+          linear-gradient(180deg, #1b2735, #090a0f);
+        animation: bgGlow 20s ease-in-out infinite alternate;
       }
 
-      @keyframes glow {
-        from { opacity: 0.4; }
+      @keyframes bgGlow {
+        from { opacity: 0.6; }
         to { opacity: 1; }
       }
 
@@ -52,7 +57,7 @@
         background: #ff1493;
         transform: rotate(45deg);
         animation: float 9s linear infinite;
-        opacity: 0.8;
+        opacity: 0.85;
       }
 
       .heart::before,
@@ -74,12 +79,12 @@
 
       @keyframes float {
         0% {
-          transform: translateY(100vh) rotate(45deg) scale(0.6);
+          transform: translateY(100svh) rotate(45deg) scale(0.6);
           opacity: 0;
         }
         20% { opacity: 1; }
         100% {
-          transform: translateY(-20vh) rotate(45deg) scale(1.2);
+          transform: translateY(-20svh) rotate(45deg) scale(1.2);
           opacity: 0;
         }
       }
@@ -88,7 +93,7 @@
       #startBtn {
         position: absolute;
         background: linear-gradient(135deg, #ff1493, #ff69b4);
-        color: white;
+        color: #fff;
         border: none;
         padding: 20px 50px;
         font-size: 26px;
@@ -97,7 +102,7 @@
         cursor: pointer;
         box-shadow: 0 20px 40px rgba(255,105,180,0.6);
         animation: pulseBtn 2s infinite;
-        z-index: 100;
+        z-index: 10;
       }
 
       @keyframes pulseBtn {
@@ -106,10 +111,12 @@
         100% { transform: scale(1); }
       }
 
-      /* CARD */
+      /* LOVE CARD */
       .card {
         width: 430px;
-        background: rgba(15, 32, 39, 0.55);
+        max-width: 92%;
+        background: rgba(15, 32, 39, 0.75);
+        -webkit-backdrop-filter: blur(22px);
         backdrop-filter: blur(22px);
         border-radius: 28px;
         padding: 30px;
@@ -121,6 +128,7 @@
         transform: scale(0.8) translateY(40px);
         filter: blur(12px);
         transition: all 1.5s ease;
+        z-index: 5;
       }
 
       .card.show {
@@ -207,6 +215,8 @@
   </head>
 
   <body>
+    <div class="bg-layer"></div>
+
     <button id="startBtn">Touch My Heart 💖</button>
 
     <audio id="bgMusic" loop>
