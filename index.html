@@ -38,15 +38,27 @@
         inset: 0;
         z-index: -1;
         background:
-          radial-gradient(circle at 20% 30%, rgba(255,182,193,0.18), transparent 55%),
-          radial-gradient(circle at 80% 70%, rgba(255,105,180,0.15), transparent 60%),
+          radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 182, 193, 0.18),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(255, 105, 180, 0.15),
+            transparent 60%
+          ),
           linear-gradient(180deg, #1b2735, #090a0f);
         animation: bgGlow 20s ease-in-out infinite alternate;
       }
 
       @keyframes bgGlow {
-        from { opacity: 0.6; }
-        to { opacity: 1; }
+        from {
+          opacity: 0.6;
+        }
+        to {
+          opacity: 1;
+        }
       }
 
       /* FLOATING HEARTS */
@@ -82,7 +94,9 @@
           transform: translateY(100svh) rotate(45deg) scale(0.6);
           opacity: 0;
         }
-        20% { opacity: 1; }
+        20% {
+          opacity: 1;
+        }
         100% {
           transform: translateY(-20svh) rotate(45deg) scale(1.2);
           opacity: 0;
@@ -100,15 +114,21 @@
         font-family: "Great Vibes", cursive;
         border-radius: 50px;
         cursor: pointer;
-        box-shadow: 0 20px 40px rgba(255,105,180,0.6);
+        box-shadow: 0 20px 40px rgba(255, 105, 180, 0.6);
         animation: pulseBtn 2s infinite;
         z-index: 10;
       }
 
       @keyframes pulseBtn {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.08); }
-        100% { transform: scale(1); }
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.08);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
 
       /* LOVE CARD */
@@ -121,8 +141,8 @@
         border-radius: 28px;
         padding: 30px;
         text-align: center;
-        box-shadow: 0 40px 90px rgba(0,0,0,0.6);
-        border: 2px solid rgba(255,105,180,0.5);
+        box-shadow: 0 40px 90px rgba(0, 0, 0, 0.6);
+        border: 2px solid rgba(255, 105, 180, 0.5);
         display: none;
         opacity: 0;
         transform: scale(0.8) translateY(40px);
@@ -151,20 +171,31 @@
         color: #eee;
       }
 
-      .photo {
-        width: 100%;
-        height: 260px;
-        border-radius: 20px;
-        overflow: hidden;
-        margin-bottom: 18px;
-        box-shadow: 0 0 30px rgba(255,105,180,0.4);
-      }
+       .photo-slider {
+      width: 100%;
+      height: 260px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 18px;
+      box-shadow: 0 0 30px rgba(255,105,180,0.4);
+    }
 
-      .photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+    .photo-slider img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.15);
+      transition: opacity 1.8s ease, transform 2.5s ease;
+    }
+
+    .photo-slider img.active {
+      opacity: 1;
+      transform: scale(1);
+    }
 
       .message {
         font-size: 15px;
@@ -174,16 +205,16 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-shadow:
-          0 0 10px rgba(255,182,193,0.6),
-          0 0 25px rgba(255,105,180,0.3);
+          0 0 10px rgba(255, 182, 193, 0.6),
+          0 0 25px rgba(255, 105, 180, 0.3);
       }
 
       .highlight {
-        background: linear-gradient(90deg,#ff1493,#ff69b4,#ffd6e8);
+        background: linear-gradient(90deg, #ff1493, #ff69b4, #ffd6e8);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 600;
-        text-shadow: 0 0 25px rgba(255,105,180,0.8);
+        text-shadow: 0 0 25px rgba(255, 105, 180, 0.8);
       }
 
       .signature {
@@ -208,8 +239,14 @@
       }
 
       @keyframes pop {
-        from { opacity: 1; transform: scale(1); }
-        to { opacity: 0; transform: scale(2) translateY(-20px); }
+        from {
+          opacity: 1;
+          transform: scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: scale(2) translateY(-20px);
+        }
       }
     </style>
   </head>
@@ -227,8 +264,13 @@
       <h1>Sanvi</h1>
       <div class="subtitle">MY FAVORITE PERSON</div>
 
-      <div class="photo">
-        <img src="IMG_0179.JPG" alt="Sanvi" />
+      <div class="photo-slider">
+        <img src="/1.JPG" class="active" />
+        <img src="/2.jpg" />
+        <img src="/3.JPG" />
+        <img src="/4.JPG" />
+        <img src="/5.jpeg" />
+        <img src="/6.png" />
       </div>
 
       <div class="message" id="message">
@@ -299,7 +341,7 @@
       }
       setInterval(createHeart, 600);
 
-      document.addEventListener("mousemove", e => {
+      document.addEventListener("mousemove", (e) => {
         const c = document.createElement("div");
         c.className = "cursor-heart";
         c.textContent = "💗";
@@ -308,6 +350,14 @@
         document.body.appendChild(c);
         setTimeout(() => c.remove(), 1000);
       });
+
+      const slides = document.querySelectorAll(".photo-slider img");
+      let i = 0;
+      setInterval(() => {
+        slides[i].classList.remove("active");
+        i = (i + 1) % slides.length;
+        slides[i].classList.add("active");
+      }, 3000);
     </script>
   </body>
 </html>
