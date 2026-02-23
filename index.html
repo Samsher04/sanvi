@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -163,10 +163,10 @@
     }
     @keyframes pop{to{opacity:0;transform:scale(2) translateY(-20px)}}
   </style> -->
-</head>
+<!-- </head>
 
 <body>
-  <h3>Thanks</h3>
+  <h3>Thanks</h3> -->
 <!-- <div class="bg-layer"></div>
 
 <button id="startBtn">Touch My Heart 💖</button>
@@ -316,6 +316,267 @@ document.addEventListener("mousemove",e=>{
 
 name.addEventListener("dblclick",()=>alert("You are my forever 💍"));
 </script> -->
+
+<!-- </body>
+</html> --> 
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Goodbye — A Beautiful Chapter</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  min-height:100svh;
+  background:#0f2027;
+  background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);
+  font-family:Poppins,sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* BACKGROUND GLOW */
+.bg-layer{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,105,180,.15), transparent 55%),
+    radial-gradient(circle at 70% 80%, rgba(0,191,255,.12), transparent 60%);
+  animation:bgGlow 15s alternate infinite;
+}
+@keyframes bgGlow{from{opacity:.6}to{opacity:1}}
+
+/* FLOATING BROKEN HEARTS */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:14px;
+  opacity:.6;
+  animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+  0%{transform:translateY(0) scale(.6);opacity:0}
+  20%{opacity:.7}
+  100%{transform:translateY(-120svh) scale(1.2);opacity:0}
+}
+
+/* START BUTTON */
+#startBtn{
+  position:absolute;
+  padding:18px 45px;
+  font-size:24px;
+  font-family:"Great Vibes";
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(135deg,#ff416c,#ff4b2b);
+  color:#fff;
+  box-shadow:0 15px 35px rgba(255,75,43,.6);
+  cursor:pointer;
+  animation:pulse 2s infinite;
+  z-index:10;
+}
+@keyframes pulse{50%{transform:scale(1.08)}}
+
+/* CARD */
+.card{
+  width:440px;
+  max-width:92%;
+  background:rgba(15,23,42,.8);
+  backdrop-filter:blur(18px);
+  border-radius:28px;
+  padding:25px;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 40px 90px rgba(0,0,0,.6);
+  display:none;
+  opacity:0;
+  transform:scale(.8) translateY(40px);
+  transition:1.5s;
+}
+.card.show{display:block;opacity:1;transform:scale(1)}
+
+h1{
+  font-family:"Great Vibes";
+  font-size:50px;
+  color:#ff6b81;
+}
+
+.subtitle{
+  font-size:12px;
+  letter-spacing:3px;
+  margin-bottom:15px;
+  color:#ddd;
+}
+
+.photo-slider{
+  height:260px;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  margin-bottom:12px;
+}
+.photo-slider img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:2s;
+}
+.photo-slider img.active{opacity:1}
+
+.caption{
+  font-size:13px;
+  color:#ffc1cc;
+  margin-bottom:15px;
+}
+
+.message{
+  font-size:15px;
+  line-height:1.9;
+  min-height:140px;
+  background:linear-gradient(90deg,#fff,#ff9aa2,#fff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.highlight{
+  font-weight:600;
+}
+
+.signature{
+  font-family:"Great Vibes";
+  font-size:26px;
+  color:#ff6b81;
+  margin-top:15px;
+}
+
+.footer{
+  font-size:12px;
+  opacity:.7;
+  margin-top:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-layer"></div>
+
+<button id="startBtn">One Last Time 💔</button>
+
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card" id="loveCard">
+  <h1>Sanvi</h1>
+  <div class="subtitle">A MEMORY I’LL ALWAYS CARRY</div>
+
+  <div class="photo-slider">
+    <img src="/1.JPG" class="active">
+    <img src="/2.jpg">
+    <img src="/3.JPG">
+    <img src="/4.JPG">
+  </div>
+
+  <div class="caption" id="caption"></div>
+
+  <div class="message" id="message">
+    We were once everything to each other.<br><br>
+    I never imagined our story would end this way.<br><br>
+    But maybe some people are meant to meet,<br>
+    change each other,<br>
+    and then walk away.<br><br>
+    <span class="highlight">
+      I’ll always be grateful for us.
+    </span>
+  </div>
+
+  <div class="signature">Goodbye ❤️</div>
+  <div class="footer">Some chapters close, but they’re never erased ✨</div>
+</div>
+
+<script>
+const startBtn=document.getElementById("startBtn");
+const card=document.getElementById("loveCard");
+const audio=document.getElementById("bgMusic");
+const message=document.getElementById("message");
+const caption=document.getElementById("caption");
+
+let fullHTML=message.innerHTML.trim();
+message.innerHTML="";
+let idx=0;
+
+function typeWriter(){
+  if(idx>=fullHTML.length)return;
+  if(fullHTML[idx]==="<"){
+    let c=fullHTML.indexOf(">",idx);
+    message.innerHTML+=fullHTML.slice(idx,c+1);
+    idx=c+1;
+  }else{
+    message.innerHTML+=fullHTML[idx++];
+  }
+  setTimeout(typeWriter,50);
+}
+
+/* Floating broken hearts */
+function createHeart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.textContent="💔";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=6+Math.random()*6+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),12000);
+}
+
+startBtn.addEventListener("click",()=>{
+  startBtn.style.display="none";
+  card.classList.add("show");
+  audio.volume=0;
+  audio.play().catch(()=>{});
+  let fade=setInterval(()=>{
+    if(audio.volume<.6){audio.volume+=.03}
+    else clearInterval(fade);
+  },200);
+
+  setTimeout(typeWriter,1000);
+  setInterval(createHeart,800);
+});
+
+/* Slider */
+const slides=document.querySelectorAll(".photo-slider img");
+const captions=[
+  "The first time you smiled at me",
+  "The day everything felt perfect",
+  "A memory I’ll never delete",
+  "Where our story paused"
+];
+let i=0;
+caption.textContent=captions[0];
+setInterval(()=>{
+  slides[i].classList.remove("active");
+  i=(i+1)%slides.length;
+  slides[i].classList.add("active");
+  caption.textContent=captions[i];
+},3500);
+</script>
 
 </body>
 </html>
